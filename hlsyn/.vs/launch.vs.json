@@ -1,0 +1,33 @@
+{
+  "version": "0.2.1",
+  "defaults": {},
+  "configurations": [
+    {
+      "type": "cppdbg",
+      "name": "C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\hlsyn",
+      "project": "",
+      "cwd": "${workspaceRoot}",
+      "program": "${debugInfo.target}",
+      "processId": 0,
+      "MIMode": "gdb",
+      "miDebuggerPath": "${env.MINGW_PREFIX}\\bin\\gdb.exe",
+      "externalConsole": true
+    },
+    {
+      "type": "default",
+      "project": "",
+      "name": "C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\hlsyn(1)"
+    },
+    {
+      "type": "default",
+      "project": "CMakeLists.txt",
+      "projectTarget": "hlsyn.exe (hlsyn\\hlsyn.exe)",
+      "name": "hlsyn.exe (hlsyn\\hlsyn.exe)"
+    },
+    {
+      "type": "default",
+      "project": "hlsyn\\hlsyn.cpp",
+      "name": "hlsyn.cpp"
+    }
+  ]
+}
