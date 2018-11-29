@@ -5,5 +5,9 @@
 
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
+#include <vector>
+#include <tuple>
 
 // TODO: Reference additional headers your program requires here.
