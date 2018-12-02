@@ -40,7 +40,7 @@ void Node::newInput(string input) {		//add input name to input vector
 
 
 void Node::newOutput(string output) {	//add output to output vector
-	this->nodeOutputs.push_back(output);
+	this->nodeOutput = output;
 }
 
 

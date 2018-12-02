@@ -33,7 +33,7 @@ public:
 	int cycleDelay;		//number of cycles required for operation
 
 	vector<string> nodeInputs;	
-	vector<string> nodeOutputs;
+	string nodeOutput;
 
 	vector<Node*> predecessors;
 	vector<Node*> succesors;

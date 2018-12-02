@@ -3,16 +3,17 @@
 // Trevor LaBanz
 
 #include "hlsyn.h"
-#include "node.h"
+//#include "node.h"
+#include "general.h"
 
 using namespace std;
 
 
-
+string comma = ",";
 
 int main(int argc, char *argv[]){
 
-	if (argc < 4) {																//usage statment if missing arguments
+	if (argc < 4) {								 								//usage statment if missing arguments
 		cout << "Usage: " << argv[0] << " cFile latency verilogFile" << endl;
 		return 1;
 	}
@@ -64,73 +65,133 @@ int main(int argc, char *argv[]){
 
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ CFile Translate ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-	vector<tuple<string, string, int>> inputList;		//vector of tuples containing <input name, Signed/Unsigned, datawidth> 		
-	vector<tuple<string, string, int>> outputList;		//vector of tuples containing <input name, Signed/Unsigned, datawidth>
-	vector<tuple<string, string, int>> variableList;	//vector of tuples containing <input name, Signed/Unsigned, datawidth>
+	vector<tuple<string, bool, int>> inputList;			//vector of tuples containing <name, isSigned? {true=signed}, datawidth> 		
+	vector<tuple<string, bool, int>> outputList;		//vector of tuples containing <name, isSigned? {true=signed}, datawidth>
+	vector<tuple<string, bool, int>> variableList;		//vector of tuples containing <name, isSigned? {true=signed}, datawidth>
 
 	vector<Node*> nodeList;			//create vector of nodes called nodeList
+
+	vector<tuple<string, string, string, bool>> graph;
 
 	string currentLine;
 	string currentWord;
 
 	while(getline(iFile, currentLine)) {	//read input cFile to build sequencing graph
+		currentWord = "";
 
 		stringstream lineStream(currentLine);
 
 		lineStream >> currentWord;
 
 		
-		//if input 
-			//add inputs to inputList
+		if (currentWord == "input") {					//if input add inputs to input list
+			bool isSigned;
+			int dataSize;
+			lineStream >> currentWord;
+			
+			if (currentWord.substr(0, 3) == "Int") {			//parse dataType
+				isSigned = true;
+				dataSize = stoi(currentWord.substr(3, 2));
+			}
+			else if (currentWord.substr(0, 4) == "UInt") {
+				isSigned = false;
+				dataSize = stoi(currentWord.substr(4, 2));
+			}
+			else {
+				cerr << "Unknown input dataType: " << currentWord << endl;
+				return 1;
+			}
 
-		//if output
-			//add outputs to outputList
+			while (lineStream >> currentWord) {
+				if (currentWord.substr(0, 2) == "//") {
+					break;
+				}
+				else {
+					removeSubstrs(currentWord, comma);
+					inputList.push_back(make_tuple(currentWord, isSigned, dataSize));
+				}
+			}
 
-		//if variable
-			//add variables to variableList
+		}
 
-		//if add or increment
-			//create add or increment Node
+		else if (currentWord == "output") {				//if output add outputs to output list
+			bool isSigned;
+			int dataSize;
+			lineStream >> currentWord;
+
+			if (currentWord.substr(0, 3) == "Int") {			//parse dataType
+				isSigned = true;
+				dataSize = stoi(currentWord.substr(3, 2));
+			}
+			else if (currentWord.substr(0, 4) == "UInt") {
+				isSigned = false;
+				dataSize = stoi(currentWord.substr(4, 2));
+			}
+			else {
+				cerr << "Unknown output dataType: " << currentWord << endl;
+				return 1;
+			}
+
+			while (lineStream >> currentWord) {
+				if (currentWord.substr(0, 2) == "//") {
+					break;
+				}
+				else {
+					removeSubstrs(currentWord, comma);
+					outputList.push_back(make_tuple(currentWord, isSigned, dataSize));
+				}
+			}
+
+		}
+
+		else if (currentWord == "variable") {			//if variable add outputs to variable list
+			bool isSigned;
+			int dataSize;
+			lineStream >> currentWord;
+
+			if (currentWord.substr(0, 3) == "Int") {			//parse dataType
+				isSigned = true;
+				dataSize = stoi(currentWord.substr(3, 2));
+			}
+			else if (currentWord.substr(0, 4) == "UInt") {
+				isSigned = false;
+				dataSize = stoi(currentWord.substr(4, 2));
+			}
+			else {
+				cerr << "Unknown input dataType: " << currentWord << endl;
+				return 1;
+			}
+
+			while (lineStream >> currentWord) {
+				if (currentWord.substr(0, 2) == "//") {
+					break;
+				}
+				else {
+					removeSubstrs(currentWord, comma);
+					variableList.push_back(make_tuple(currentWord, isSigned, dataSize));
+				}
+			}
+
+		}
+
+		else if (currentLine.find("=") != std::string::npos) {				//handle operation line
+			Node* currentNode;
+			currentNode = createOperation(currentLine, inputList, outputList, variableList);
+			if (currentNode == NULL)
+				return 1;
+			nodeList.push_back(currentNode);
+
+		}
+
+		else if (currentWord == "if") {
+
+		}
+		else if (currentWord == "else") {
+
+
+		}
 	
-		//if sub or decrement
-			//create subtract or decrement Node
-
-		//if MUL
-			//create MUL Node
-
-		//if DIV
-			//create DIV Node
-
-		//if MOD
-			//create MOD Node
-
-		//if GT
-			//create COMP Node
-
-		//if LT
-			//create COMP Node
-
-		//if EQ
-			//create COMP Node
-
-		//if MUX
-			//create MUX Node
-
-		//if SHL
-			//create SHL Node
-
-		//if SHR
-			//create SHR Node
-
-
-		//if IF STATEMENT
-			//create if statement Nodes
-
-
 	}
-
-
-
 	
 	
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Force Directed Scheduling ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
@@ -165,11 +226,6 @@ int main(int argc, char *argv[]){
 	//add states for each time in Scheduled Graph
 
 	//end module
-
-
-
-
-
 
 
 	return 0;
