@@ -8,6 +8,7 @@
 using namespace std;
 
 Node::Node(string op) {
+	this->visited = false;
 	this->operation = op;
 	this->ASAPStart = 0;
 	this->ALAPStart = 0;
@@ -51,4 +52,24 @@ void Node::addPred(Node* p) {			//add predecessor node
 
 void Node::addSucc(Node* s) {			//add successor node
 	this->succesors.push_back(s);
+}
+
+bool Node::isPred(string var) {			//returns true if var is contained within nodeInputs
+	auto loc = find(this->nodeInputs.begin(), this->nodeInputs.end(), var);
+	if (loc != this->nodeInputs.end())
+		return true;
+	return false;
+}
+
+
+bool Node::findSucc(string var) {
+	if (var.compare(this->nodeOutput))
+		return true;
+	return false;
+}
+
+
+void Node::calcWidth() {
+	this->width = this->ALAPStart - this->ASAPStart + 1;
+	this->probVal = 1.0 / this->width;						//calculate operation probability
 }

@@ -2,6 +2,8 @@
 
 #include <string>
 #include <vector>
+#include <tuple>
+#include <algorithm>
 
 using namespace std;
 
@@ -26,11 +28,15 @@ public:
 	//properties
 	string operation;
 
+	bool visited;
+
 	int ASAPStart;
 	int ALAPStart;
 	int width;			//ALAP-ASAP+1
 	int scheduledTime;	//scheduled time determined by FDS
 	int cycleDelay;		//number of cycles required for operation
+
+	double probVal;		//probability value for FDS
 
 	vector<string> nodeInputs;	
 	string nodeOutput;
@@ -38,7 +44,7 @@ public:
 	vector<Node*> predecessors;
 	vector<Node*> succesors;
 
-
+	vector<tuple<bool, string>>	nodeConditions;		//conditionList contains <True/False condition for if/else, condition variable string> 
 
 	//methods
 
@@ -51,6 +57,11 @@ public:
 	
 	void addPred(Node* p);
 	void addSucc(Node* s);
+
+	bool isPred(string var);
+	bool findSucc(string var);
+
+	void calcWidth();
 
 
 private:
