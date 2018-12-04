@@ -43,3 +43,9 @@ void doFDS(vector<Node*> nodeList);
 tuple<int, double> forceDir(vector<Node*> nodeList, Node* node, int cycleNum, bool first, bool Successor); 
 
 int convertOpEnum(string s);
+
+int calcNStates(vector<Node*> nodeList);
+
+string convertOp(string val);
+
+string nodeToVerilog(vector<Node*> nodeList);

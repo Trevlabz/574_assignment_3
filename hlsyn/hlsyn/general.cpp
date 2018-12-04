@@ -3,7 +3,6 @@
 
 #include "general.h"
 
-#include <iomanip>
 
 using namespace std;
 
@@ -344,4 +343,133 @@ int convertOpEnum(string s) {		//quickly convert node operation to enumerated va
 	else
 		return logic;
 }
+
+
+
+
+int calcNStates(vector<Node*> nodeList) {	//calculate the number of statebits required for the HLSM
+	int maxTime = 0;
+	for (Node* cNode : nodeList) {
+		if (cNode->scheduledTime > maxTime)
+			maxTime = cNode->scheduledTime;
+	}
+	return maxTime;	//fill in with number of bits
+}
+
+
+string convertOp(string val) {
+	if (val == "ADD")
+		return "+";
+	else if (val == "SUB")
+		return "-";
+	else if (val == "MUL")
+		return "*";
+	else if (val == "DIV")
+		return "/";
+	else if (val == "MOD")
+		return "%";
+	else if (val == "SHR")
+		return ">>";
+	else if (val == "SHL")
+		return "<<";
+	else if (val == "GT")
+		return ">";
+	else if (val == "LT")
+		return "<";
+	else if (val == "EQ")
+		return "==";
+	else if (val == "MUX")
+		return "?";
+	else return val;
+}
+
+
+string nodeToVerilog(vector<Node*> nodeList)
+{
+	ostringstream oss;
+	const int nStates = calcNStates(nodeList);
+	for (int i = 1; i <= nStates; i++) {																					//loop through each state
+		vector<tuple<bool, string>> conds;
+		oss << "\t\t\t\t" << i + 1 << " : begin" << '\n';
+
+		for (int j = 0; j < nodeList.size(); j++) {																			//loop through nodes to determine if node is scheduled in current state
+			if (nodeList[j]->scheduledTime == i) {
+
+				for (auto it = nodeList[j]->nodeConditions.begin(); it != nodeList[j]->nodeConditions.end(); it++) {		
+					if (conds.size() == 0) {
+						conds.push_back(*it);
+						oss << "\t\t\t\t\t" << "if (" << get<1>(*it) << ") begin" << '\n';
+					}
+					else {
+						auto endit = nodeList[j]->nodeConditions.rbegin();
+						if (!get<1>(conds[conds.size() - 1]).compare(get<1>(*endit)) && get<0>(conds[conds.size() - 1]) == get<0>(*endit))
+							;
+						else if (conds.size() >= 2 && !get<1>(conds[conds.size() - 2]).compare(get<1>(*it))) {
+							oss << "\t\t\t\t\t" << "end" << '\n';
+							conds.pop_back();
+						}
+						else if (get<1>(conds.back()).compare(get<1>(*it))) {
+							conds.push_back(*it);
+							oss << "\t\t\t\t\t" << "if (" << get<1>(*it) << ") begin" << '\n';
+						}
+						else {
+							if (get<0>(conds.back()) != get<0>(*it)) {
+								oss << "\t\t\t\t\t" << "end else begin" << '\n';
+								conds.pop_back();
+								conds.push_back(*it);
+							}
+						}
+					}
+				}
+
+			outer:
+				for (auto it = conds.begin(); it != conds.end(); it++) {													
+					bool found2 = false;
+					for (auto it2 = nodeList[j]->nodeConditions.begin(); it2 != nodeList[j]->nodeConditions.end(); it2++)
+						if (!get<1>(*it).compare(get<1>(*it2)))
+							found2 = true;
+					if (!found2) {
+						conds.erase(it);
+						oss << "\t\t\t\t\t" << "end" << '\n';
+						goto outer;
+					}
+				}
+
+
+				string op = convertOp(nodeList[j]->operation);
+				vector<string> ins = nodeList[j]->nodeInputs;
+				oss << "\t\t\t\t\t" << nodeList[j]->nodeOutput << " = ";
+				if (op == "INC") {
+					oss << ins.front() << " + 1;" << '\n';
+				}
+				else if (op == "DEC") {
+					oss << ins.front() << " - 1;" << '\n';
+				}
+				else if (op == "?") {
+					string in3 = ins.back();
+					ins.pop_back();
+					string in2 = ins.back();
+					ins.pop_back();
+					string in1 = ins.back();
+					oss << in1 << " " << op << " " << in2 << " : " << in3 << ";" << '\n';
+				}
+				else {
+					oss << ins.front() << " " << op << " " << ins.back() << ";" << '\n';
+				}
+			}
+		}
+
+		for (auto it = conds.begin(); it != conds.end(); it++)
+			oss << "\t\t\t\t\t" << "end" << '\n';
+
+		if (i < nStates)
+			oss << "\t\t\t\t\t" << "State <= State + 1;" << '\n';
+		else
+			oss << "\t\t\t\t\t" << "State <= 1;" << '\n';
+
+		oss << "\t\t\t\t" << "end" << '\n';
+	}
+	return oss.str();
+}
+
 

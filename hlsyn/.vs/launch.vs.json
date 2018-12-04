@@ -8,7 +8,7 @@
 			"projectTarget": "hlsyn.exe (hlsyn\\hlsyn.exe)",
 			"name": "hlsyn.exe (hlsyn\\hlsyn.exe)",
 			"args": [
-				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles_full\\standard_tests\\hls_test1.c",
+				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles_full\\if_tests\\test_if4.c",
 				"4",
 				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles_full\\standard_tests\\hls_test1.v"
 			]

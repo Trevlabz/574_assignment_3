@@ -252,25 +252,113 @@ int main(int argc, char *argv[]){
 
 	/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Verilog File Generation ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
 
-
-	//create header of verilog file
-
-	//module declaration with (Clk, Rst, Start, Done, <inputs>, <outputs>)
+	ofstream oFile(outputFile);
 	
-	//<<"	input Clk, Rst, Start;"<<endl;
+	currentLine = "";
 
-	//<<"	output reg Done;"<<endl;
+	int nStates = calcNStates(nodeList) + 3;		//calculate number of states in nodelist and add 3 for start/stop states
 
-	//declare other inputs, outputs, and variables
+	int nStateBits = floor(log2(nStates)) + 1;		//calculate the number of bits required for the number of states
 
-	//reset handling/clock handling
 
-	//create initial states and end states
+	/**********************************************************************************************************************/
+	/*--------------------------------REPLACE COUT WITH OFILE BELOW-------------------------------------------------------*/
+	/**********************************************************************************************************************/
 
-	//add states for each time in Scheduled Graph
 
-	//end module
+	oFile << "'timescale 1ns / 1ns" << "\n\n\n";			//create header of verilog file
 
+	oFile << "module HLSM (Clk, Rst, Start, Done, ";							//module declaration with (Clk, Rst, Start, Done, ...
+	for (int i = 0;i < inputList.size(); i++) {						//append inputs
+		/*if (i == inputList.size()-1)
+			oFile << get<0>(inputList[i]);
+		else*/
+			oFile << get<0>(inputList[i]) << ", ";
+	}
+																			
+	for (int i = 0; i < outputList.size(); i++) {						//append outputs
+		if (i == outputList.size() - 1)
+			oFile << get<0>(outputList[i]);
+		else
+			oFile << get<0>(outputList[i]) << ", ";
+	}
+
+	oFile << ");" << "\n\n";		//finish module declaration
+
+	oFile << '\t' << "input Clk, Rst, Start;" << '\n';	//initialize standard ports
+	oFile << '\t' << "output reg Done;" << '\n';
+	oFile << '\t' << "reg [" << nStateBits -1 << ":0] State;"<< "\n\n";				// declare State reg
+
+		
+	for (int i = 0; i < inputList.size(); i++) {				//declare inputs
+		oFile << '\t' << "input ";
+		if(get<1>(inputList[i]))
+			oFile <<"signed ";
+		if (get<2>(inputList[i]) > 1)
+			oFile << "[" << get<2>(inputList[i]) - 1 << ":0] ";
+		oFile<< get<0>(inputList[i]) <<";\n";
+	}
+	
+	oFile << '\n';
+
+	for (int i = 0; i < outputList.size(); i++) {				//declare outputs
+		oFile << '\t' << "output ";
+		if (get<1>(outputList[i]))
+			oFile << "signed ";
+		if (get<2>(outputList[i]) > 1)
+			oFile << "[" << get<2>(outputList[i]) - 1 << ":0] ";
+		oFile << get<0>(outputList[i]) << ";\n";
+	}
+	
+	oFile << '\n';
+
+	for (int i = 0; i < variableList.size(); i++) {				//declare regs
+		oFile << '\t' << "reg ";
+		if (get<1>(variableList[i]))
+			oFile << "signed ";
+		if (get<2>(variableList[i]) > 1)
+			oFile << "[" << get<2>(variableList[i]) - 1 << ":0] ";
+		oFile << get<0>(variableList[i]) << ";\n";
+	}
+	
+
+	oFile << "\n\n\n";
+
+	oFile << '\t' << "always @(posedge Clk) begin" << '\n';
+
+	oFile << "\t\t" << "if (Rst) begin" << '\n';
+
+	oFile << "\t\t\t";
+
+	for (int i = 0; i < outputList.size(); i++) {				//set outputs to zero
+		oFile << get<0>(outputList[i]) << " <= 0; ";
+	}
+
+	for (int i = 0; i < variableList.size(); i++) {				//set regs to zero
+		oFile << get<0>(variableList[i]) << " <= 0; ";
+	}
+
+	oFile << "\n\t\t\t" << "State <= 0; Done <= 0;\n";
+	oFile << "\t\t" << "end\n";
+	oFile << "\t\t" << "else begin\n";
+
+	oFile << "\t\t\t" << "case (State)" << '\n';
+	
+	oFile << "\t\t\t\t" << "0 : begin " << "if (Start) State <= 2; end" << '\n';	//wait for Start=1 state
+	oFile << "\t\t\t\t" << "1 : begin " << "Done <= 1; State <= 0;" << '\n';		//Done=1 state
+
+
+	oFile << nodeToVerilog(nodeList);		//create string of all states and their respective operations
+
+
+	oFile << "\t\t\t" << "endcase" << '\n';	//end everything
+	oFile << "\t\t" << "end" << '\n';
+	oFile << '\t' << "end" << '\n';
+	oFile << "endmodule";
+
+	oFile.close();
+
+	cout << "HLSM created in output file: " << outputFile << endl;
 
 	return 0;
 }
