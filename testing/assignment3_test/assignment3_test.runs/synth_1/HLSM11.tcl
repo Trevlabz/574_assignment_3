@@ -17,8 +17,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_msg_config -id {HDL 9-1061} -limit 100000
-set_msg_config -id {HDL 9-1654} -limit 100000
 create_project -in_memory -part xc7k70tfbv676-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -42,12 +40,12 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top HLSM -part xc7k70tfbv676-1
+synth_design -top HLSM11 -part xc7k70tfbv676-1
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef HLSM.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file HLSM_utilization_synth.rpt -pb HLSM_utilization_synth.pb"
+write_checkpoint -force -noxdef HLSM11.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file HLSM11_utilization_synth.rpt -pb HLSM11_utilization_synth.pb"
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

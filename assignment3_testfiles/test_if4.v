@@ -1,7 +1,7 @@
 `timescale 1ns / 1ns
 
 
-module HLSM4 (Clk, Rst, Start, Done, a, b, c, zero, one, t, z, x);
+module HLSM14 (Clk, Rst, Start, Done, a, b, c, zero, one, t, z, x);
 
 	input Clk, Rst, Start;
 	output reg Done;

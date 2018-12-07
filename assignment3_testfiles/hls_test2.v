@@ -1,11 +1,11 @@
 `timescale 1ns / 1ns
 
 
-module HLSM11 (Clk, Rst, Start, Done, a, b, c, z, x);
+module HLSM32 (Clk, Rst, Start, Done, a, b, c, z, x);
 
 	input Clk, Rst, Start;
 	output reg Done;
-	reg [2:0] State;
+	reg [3:0] State;
 
 	input signed [31:0] a;
 	input signed [31:0] b;
@@ -15,15 +15,18 @@ module HLSM11 (Clk, Rst, Start, Done, a, b, c, z, x);
 	output reg signed [31:0] x;
 
 	reg signed [31:0] d;
+	reg signed [31:0] e;
 	reg signed [31:0] f;
 	reg signed [31:0] g;
-	reg signed [31:0] zrin;
+	reg signed [31:0] h;
+	reg dLTe;
+	reg dEQe;
 
 
 
 	always @(posedge Clk) begin
 		if (Rst) begin
-			z <= 0; x <= 0; d <= 0; f <= 0; g <= 0; zrin <= 0; 
+			z <= 0; x <= 0; d <= 0; e <= 0; f <= 0; g <= 0; h <= 0; dLTe <= 0; dEQe <= 0; 
 			State <= 0; Done <= 0;
 		end
 		else begin
@@ -32,23 +35,29 @@ module HLSM11 (Clk, Rst, Start, Done, a, b, c, z, x);
 				1 : begin Done <= 1; State <= 0; end
 				2 : begin
 					d <= a + b;
-					g <= a < b;
-					f <= a * c;
 					State <= State + 1;
 				end
 				3 : begin
-					zrin <= a + c;
+					e <= a + c;
 					State <= State + 1;
 				end
 				4 : begin
-					if (g) begin
-					zrin <= a + b;
-					end
+					dLTe <= d < e;
 					State <= State + 1;
 				end
 				5 : begin
-					x <= f - d;
-					z <= zrin + f;
+					f <= a - b;
+					dEQe <= d == e;
+					g <= dLTe ? d : e;
+					State <= State + 1;
+				end
+				6 : begin
+					h <= dEQe ? g : f;
+					State <= State + 1;
+				end
+				7 : begin
+					x <= g << dLTe;
+					z <= h >> dEQe;
 					State <= 1;
 				end
 			endcase

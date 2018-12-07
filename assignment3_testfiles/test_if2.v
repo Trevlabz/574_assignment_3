@@ -1,7 +1,7 @@
 `timescale 1ns / 1ns
 
 
-module HLSM2 (Clk, Rst, Start, Done, a, b, c, one, z, x);
+module HLSM12 (Clk, Rst, Start, Done, a, b, c, one, z, x);
 
 	input Clk, Rst, Start;
 	output reg Done;
@@ -36,51 +36,38 @@ module HLSM2 (Clk, Rst, Start, Done, a, b, c, one, z, x);
 				0 : begin if (Start) State <= 2; end
 				1 : begin Done <= 1; State <= 0; end
 				2 : begin
-					f <= a - b;
-					State <= State + 1;
-				end
-				3 : begin
 					d <= a + b;
 					e <= a + c;
 					State <= State + 1;
 				end
-				4 : begin
+				3 : begin
+					f <= a - b;
 					dEQe <= d == e;
+					dLTe <= d > e;
 					State <= State + 1;
 				end
-				5 : begin
+				4 : begin
 					dLTEe <= dEQe + dLTe;
 					State <= State + 1;
 				end
-				6 : begin
-					dLTe <= d > e;
-					if (dLTEe) begin
-					g <= d + e;
-					end
-					z <= h >> one;
-					State <= State + 1;
-				end
-				7 : begin
+				5 : begin
 					if (dLTEe) begin
 					if (dLTe) begin
 					h <= f + one;
 					end
-					end
-					State <= State + 1;
-				end
-				8 : begin
-					if (dLTEe) begin
 					h <= f + e;
 					end
 					State <= State + 1;
 				end
-				9 : begin
+				6 : begin
 					if (dLTEe) begin
 					if (dLTe) begin
 					g <= e + one;
 					end
+					g <= d + e;
 					end
 					x <= h << one;
+					z <= h >> one;
 					State <= 1;
 				end
 			endcase

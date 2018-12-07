@@ -1,29 +1,30 @@
 `timescale 1ns / 1ns
 
 
-module HLSM11 (Clk, Rst, Start, Done, a, b, c, z, x);
+module HLSM5 (Clk, Rst, Start, Done, a, b, c, d, e, f, j, k);
 
 	input Clk, Rst, Start;
 	output reg Done;
 	reg [2:0] State;
 
-	input signed [31:0] a;
-	input signed [31:0] b;
-	input signed [31:0] c;
+	input signed [15:0] a;
+	input signed [15:0] b;
+	input signed [15:0] c;
+	input signed [15:0] d;
+	input signed [15:0] e;
+	input signed [15:0] f;
 
-	output reg signed [31:0] z;
-	output reg signed [31:0] x;
+	output reg signed [15:0] j;
+	output reg signed [15:0] k;
 
-	reg signed [31:0] d;
-	reg signed [31:0] f;
-	reg signed [31:0] g;
-	reg signed [31:0] zrin;
+	reg signed [15:0] h;
+	reg signed [15:0] i;
 
 
 
 	always @(posedge Clk) begin
 		if (Rst) begin
-			z <= 0; x <= 0; d <= 0; f <= 0; g <= 0; zrin <= 0; 
+			j <= 0; k <= 0; h <= 0; i <= 0; 
 			State <= 0; Done <= 0;
 		end
 		else begin
@@ -31,24 +32,19 @@ module HLSM11 (Clk, Rst, Start, Done, a, b, c, z, x);
 				0 : begin if (Start) State <= 2; end
 				1 : begin Done <= 1; State <= 0; end
 				2 : begin
-					d <= a + b;
-					g <= a < b;
-					f <= a * c;
+					h <= a * b;
 					State <= State + 1;
 				end
 				3 : begin
-					zrin <= a + c;
+					k <= e * f;
 					State <= State + 1;
 				end
 				4 : begin
-					if (g) begin
-					zrin <= a + b;
-					end
+					i <= h + c;
 					State <= State + 1;
 				end
 				5 : begin
-					x <= f - d;
-					z <= zrin + f;
+					j <= i * d;
 					State <= 1;
 				end
 			endcase

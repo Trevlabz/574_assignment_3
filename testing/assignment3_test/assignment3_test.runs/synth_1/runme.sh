@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log HLSM.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source HLSM.tcl
+EAStep vivado -log HLSM11.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source HLSM11.tcl

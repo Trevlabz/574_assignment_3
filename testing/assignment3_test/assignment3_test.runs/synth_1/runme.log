@@ -1,6 +1,6 @@
 
 *** Running vivado
-    with args -log HLSM.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source HLSM.tcl
+    with args -log HLSM11.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source HLSM11.tcl
 
 
 ****** Vivado v2018.2 (64-bit)
@@ -8,35 +8,35 @@
   **** IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
     ** Copyright 1986-2018 Xilinx, Inc. All Rights Reserved.
 
-source HLSM.tcl -notrace
-Command: synth_design -top HLSM -part xc7k70tfbv676-1
+source HLSM11.tcl -notrace
+Command: synth_design -top HLSM11 -part xc7k70tfbv676-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7k70t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 10136 
+INFO: Helper process launched with PID 6892 
 ---------------------------------------------------------------------------------
-Starting Synthesize : Time (s): cpu = 00:00:01 ; elapsed = 00:00:01 . Memory (MB): peak = 356.324 ; gain = 99.438
+Starting Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 356.035 ; gain = 99.117
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-6157] synthesizing module 'HLSM' [C:/Users/trevl/Documents/GitHub/Assignment3/assignment3_testfiles/test_if1.v:4]
+INFO: [Synth 8-6157] synthesizing module 'HLSM11' [C:/Users/trevl/Documents/GitHub/Assignment3/assignment3_testfiles/test_if1.v:4]
 INFO: [Synth 8-155] case statement is not full and has no default [C:/Users/trevl/Documents/GitHub/Assignment3/assignment3_testfiles/test_if1.v:30]
-INFO: [Synth 8-6155] done synthesizing module 'HLSM' (1#1) [C:/Users/trevl/Documents/GitHub/Assignment3/assignment3_testfiles/test_if1.v:4]
+INFO: [Synth 8-6155] done synthesizing module 'HLSM11' (1#1) [C:/Users/trevl/Documents/GitHub/Assignment3/assignment3_testfiles/test_if1.v:4]
 ---------------------------------------------------------------------------------
-Finished Synthesize : Time (s): cpu = 00:00:01 ; elapsed = 00:00:02 . Memory (MB): peak = 411.598 ; gain = 154.711
+Finished Synthesize : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 410.859 ; gain = 153.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 411.598 ; gain = 154.711
+Finished Constraint Validation : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 410.859 ; gain = 153.941
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7k70tfbv676-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 411.598 ; gain = 154.711
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 410.859 ; gain = 153.941
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7k70tfbv676-1
-DSP Debug: swapped A/B pins for adder 000002A9CC38E4D0
-INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'HLSM'
+DSP Debug: swapped A/B pins for adder 000001D3D05E42D0
+INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'HLSM11'
 ---------------------------------------------------------------------------------------------------
                    State |                     New Encoding |                Previous Encoding 
 ---------------------------------------------------------------------------------------------------
@@ -47,9 +47,9 @@ INFO: [Synth 8-802] inferred FSM for state register 'State_reg' in module 'HLSM'
                  iSTATE4 |                              100 |                              101
                  iSTATE0 |                              101 |                              001
 ---------------------------------------------------------------------------------------------------
-INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'HLSM'
+INFO: [Synth 8-3354] encoded FSM with state register 'State_reg' using encoding 'sequential' in module 'HLSM11'
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 411.598 ; gain = 154.711
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:02 ; elapsed = 00:00:02 . Memory (MB): peak = 410.859 ; gain = 153.941
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -82,7 +82,7 @@ Finished RTL Component Statistics
 Start RTL Hierarchical Component Statistics 
 ---------------------------------------------------------------------------------
 Hierarchical RTL Component report 
-Module HLSM 
+Module HLSM11 
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input     32 Bit       Adders := 3     
@@ -131,73 +131,73 @@ DSP Report: register f_reg is absorbed into DSP f_reg.
 DSP Report: operator f0 is absorbed into DSP f_reg.
 DSP Report: operator f0 is absorbed into DSP f_reg.
 INFO: [Synth 8-3333] propagating constant 0 across sequential element (\g_reg[1] )
-WARNING: [Synth 8-3332] Sequential element (g_reg[1]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[47]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[46]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[45]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[44]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[43]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[42]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[41]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[40]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[39]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[38]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[37]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[36]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[35]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[34]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[33]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[32]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[31]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[30]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[29]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[28]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[27]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[26]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[25]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[24]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[23]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[22]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[21]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[20]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[19]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[18]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[17]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[16]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[15]) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[47]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[46]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[45]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[44]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[43]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[42]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[41]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[40]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[39]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[38]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[37]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[36]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[35]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[34]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[33]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[32]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[31]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[30]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[29]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[28]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[27]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[26]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[25]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[24]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[23]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[22]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[21]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[20]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[19]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[18]__0) is unused and will be removed from module HLSM.
-WARNING: [Synth 8-3332] Sequential element (f_reg[17]__0) is unused and will be removed from module HLSM.
+WARNING: [Synth 8-3332] Sequential element (g_reg[1]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[47]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[46]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[45]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[44]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[43]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[42]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[41]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[40]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[39]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[38]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[37]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[36]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[35]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[34]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[33]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[32]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[31]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[30]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[29]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[28]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[27]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[26]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[25]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[24]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[23]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[22]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[21]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[20]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[19]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[18]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[17]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[16]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[15]) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[47]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[46]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[45]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[44]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[43]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[42]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[41]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[40]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[39]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[38]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[37]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[36]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[35]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[34]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[33]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[32]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[31]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[30]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[29]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[28]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[27]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[26]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[25]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[24]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[23]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[22]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[21]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[20]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[19]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[18]__0) is unused and will be removed from module HLSM11.
+WARNING: [Synth 8-3332] Sequential element (f_reg[17]__0) is unused and will be removed from module HLSM11.
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 542.262 ; gain = 285.375
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 542.449 ; gain = 285.531
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -207,10 +207,10 @@ DSP: Preliminary Mapping  Report (see note below)
 +------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
 |Module Name | DSP Mapping    | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
 +------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
-|HLSM        | A*B            | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|HLSM        | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
-|HLSM        | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
-|HLSM        | (PCIN>>17)+A*B | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|HLSM11      | A*B            | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|HLSM11      | (PCIN>>17)+A*B | 15     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
+|HLSM11      | A*B            | 18     | 18     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 0    | 
+|HLSM11      | (PCIN>>17)+A*B | 18     | 15     | -      | -      | 48     | 0    | 0    | -    | -    | -     | 0    | 1    | 
 +------------+----------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
 
 Note: The table above is a preliminary report that shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
@@ -228,7 +228,7 @@ No constraint files found.
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 542.262 ; gain = 285.375
+Finished Timing Optimization : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 542.449 ; gain = 285.531
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -240,7 +240,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Technology Mapping : Time (s): cpu = 00:00:05 ; elapsed = 00:00:06 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -264,7 +264,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished IO Insertion : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -277,7 +277,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -289,25 +289,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Handling Custom Attributes : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Renaming Generated Nets : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -342,11 +342,11 @@ Report Instance Areas:
 |1     |top      |       |   572|
 +------+---------+-------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 66 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
-Synthesis Optimization Complete : Time (s): cpu = 00:00:05 ; elapsed = 00:00:07 . Memory (MB): peak = 551.285 ; gain = 294.398
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
+Synthesis Optimization Complete : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 551.473 ; gain = 294.555
 INFO: [Project 1-571] Translating synthesized netlist
 INFO: [Netlist 29-17] Analyzing 142 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -358,9 +358,9 @@ No Unisim elements were transformed.
 INFO: [Common 17-83] Releasing license: Synthesis
 16 Infos, 66 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:08 ; elapsed = 00:00:10 . Memory (MB): peak = 653.160 ; gain = 409.094
+synth_design: Time (s): cpu = 00:00:09 ; elapsed = 00:00:10 . Memory (MB): peak = 652.516 ; gain = 408.746
 WARNING: [Constraints 18-5210] No constraint will be written out.
-INFO: [Common 17-1381] The checkpoint 'C:/Users/trevl/Documents/GitHub/Assignment3/testing/assignment3_test/assignment3_test.runs/synth_1/HLSM.dcp' has been generated.
-INFO: [runtcl-4] Executing : report_utilization -file HLSM_utilization_synth.rpt -pb HLSM_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.030 . Memory (MB): peak = 653.160 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Thu Dec  6 21:11:39 2018...
+INFO: [Common 17-1381] The checkpoint 'C:/Users/trevl/Documents/GitHub/Assignment3/testing/assignment3_test/assignment3_test.runs/synth_1/HLSM11.dcp' has been generated.
+INFO: [runtcl-4] Executing : report_utilization -file HLSM11_utilization_synth.rpt -pb HLSM11_utilization_synth.pb
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.031 . Memory (MB): peak = 652.516 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  6 21:27:24 2018...
