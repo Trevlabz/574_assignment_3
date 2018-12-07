@@ -5,12 +5,12 @@
 		{
 			"type": "default",
 			"project": "CMakeLists.txt",
-			"projectTarget": "hlsyn.exe (hlsyn\\hlsyn.exe)",
-			"name": "hlsyn.exe (hlsyn\\hlsyn.exe)",
+			"projectTarget": "hlsyn.exe (src\\hlsyn.exe)",
+			"name": "hlsyn.exe (src\\hlsyn.exe)",
 			"args": [
-				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles_full\\if_tests\\test_if4.c",
-				"4",
-				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles_full\\standard_tests\\hls_test1.v"
+				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles\\if_tests\\test_if3.c",
+				"8",
+				"C:\\Users\\trevl\\Documents\\GitHub\\Assignment3\\assignment3_testfiles\\test_if3.v"
 			]
 		}
 	]

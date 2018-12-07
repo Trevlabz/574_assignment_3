@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2018.2 (64-bit)
+# SW Build 2258646 on Thu Jun 14 20:03:12 MDT 2018
+# IP Build 2256618 on Thu Jun 14 22:10:49 MDT 2018
+# Start of session at: Thu Dec  6 19:14:13 2018
+# Process ID: 3952
+# Current directory: C:/Users/trevl/Documents/GitHub/Assignment3/testing/assignment3_test/assignment3_test.runs/impl_1
+# Command line: vivado.exe -log HLSM.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source HLSM.tcl -notrace
+# Log file: C:/Users/trevl/Documents/GitHub/Assignment3/testing/assignment3_test/assignment3_test.runs/impl_1/HLSM.vdi
+# Journal file: C:/Users/trevl/Documents/GitHub/Assignment3/testing/assignment3_test/assignment3_test.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source HLSM.tcl -notrace
