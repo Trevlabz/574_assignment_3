@@ -30,6 +30,8 @@ Node* createOperation(string line, vector<tuple<string, bool, int>> inputV, vect
 
 void connectGraph(vector<Node*> nodeList);
 
+void connectGraphConditions(vector<Node*> nodeList); 
+
 int doASAP(vector<Node*> nodeList);
 
 void doALAP(vector<Node*> nodeList, int lastTime);

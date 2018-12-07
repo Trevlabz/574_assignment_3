@@ -220,7 +220,9 @@ int main(int argc, char *argv[]){
 	
 	//compute timeframes
 
-	connectGraph(nodeList);		//make graph connections
+	connectGraph(nodeList);		//make graph connections based on node input and outputs
+	
+	connectGraphConditions(nodeList);	//make graph connections based on node conditions
 
 	int minCycles = doASAP(nodeList);	//peform ASAP scheduling
 

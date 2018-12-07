@@ -25,7 +25,7 @@ bool isVar(string testStr, vector<tuple<string, bool, int>> vect) {			//checks t
 
 
 Node* createOperation(string line, vector<tuple<string,bool,int>> inputV, vector<tuple<string, bool, int>> outputV, vector<tuple<string, bool, int>> varV){			//reads an input line, currently defined inputs,outputs,vars and returns a Node object
-	string substr1 = "", substr2 = "", substr3 = "", substr4 = "", substr5 = "", substr6 ="", substr7 = "";//break up line into 7 substrings using string stream
+	string substr1 = "", substr2 = "", substr3 = "", substr4 = "", substr5 = "", substr6 ="", substr7 = "";	//break up line into 7 substrings using string stream
 	string op = "";
 
 	stringstream ss(line);
@@ -143,13 +143,28 @@ Node* createOperation(string line, vector<tuple<string,bool,int>> inputV, vector
 void connectGraph(vector<Node*> nodeList) {		//make all connections between nodes in nodeList
 	for (Node* pNode : nodeList) {				//loop through all nodes 
 		for (Node* sNode : nodeList) {			//loop through all nodes and check if pNode is a predecessor of nNode
-			if (sNode->isPred(pNode->nodeOutput)) {
+			if (sNode->isSucc(pNode->nodeOutput)) {
 				sNode->addPred(pNode);			//add pNode as predecessor to sNode
 				pNode->addSucc(sNode);			//add sNode as successor to pNode
 			}
 		}
 	}
 }
+
+
+void connectGraphConditions(vector<Node*> nodeList) {		//search through all nodes for conditions and connect them assign predecessors/successsor
+	for (Node* cNode : nodeList) {
+		for (auto cond : cNode->nodeConditions) {
+			for (Node* pNode : nodeList) {
+				if (pNode->isPred(get<1>(cond))) {
+					cNode->addPred(pNode);
+					pNode->addSucc(cNode);
+				}
+			}
+		}
+	}
+}
+
 
 
 
@@ -398,7 +413,12 @@ string nodeToVerilog(vector<Node*> nodeList)
 				for (auto it = nodeList[j]->nodeConditions.begin(); it != nodeList[j]->nodeConditions.end(); it++) {		
 					if (conds.size() == 0) {
 						conds.push_back(*it);
-						oss << "\t\t\t\t\t" << "if (" << get<1>(*it) << ") begin" << '\n';
+						if (!get<0>(*it)) {
+							oss << "\t\t\t\t\t" << "if (!" << get<1>(*it) << ") begin" << '\n';
+						}
+						else {
+							oss << "\t\t\t\t\t" << "if (" << get<1>(*it) << ") begin" << '\n';
+						}
 					}
 					else {
 						auto endit = nodeList[j]->nodeConditions.rbegin();
@@ -408,9 +428,13 @@ string nodeToVerilog(vector<Node*> nodeList)
 							oss << "\t\t\t\t\t" << "end" << '\n';
 							conds.pop_back();
 						}
-						else if (get<1>(conds.back()).compare(get<1>(*it))) {
+						else if (get<1>(conds.back()).compare(get<1>(*it)) && (get<0>(*it))) {
 							conds.push_back(*it);
 							oss << "\t\t\t\t\t" << "if (" << get<1>(*it) << ") begin" << '\n';
+						}
+						else if (get<1>(conds.back()).compare(get<1>(*it)) && !(get<0>(*it))) {
+							conds.push_back(*it);
+							oss << "\t\t\t\t\t" << "if (!" << get<1>(*it) << ") begin" << '\n';
 						}
 						else {
 							if (get<0>(conds.back()) != get<0>(*it)) {
@@ -438,7 +462,7 @@ string nodeToVerilog(vector<Node*> nodeList)
 
 				string op = convertOp(nodeList[j]->operation);
 				vector<string> ins = nodeList[j]->nodeInputs;
-				oss << "\t\t\t\t\t" << nodeList[j]->nodeOutput << " = ";
+				oss << "\t\t\t\t\t" << nodeList[j]->nodeOutput << " <= ";
 				if (op == "INC") {
 					oss << ins.front() << " + 1;" << '\n';
 				}

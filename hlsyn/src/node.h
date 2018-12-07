@@ -59,7 +59,7 @@ public:
 	void addSucc(Node* s);
 
 	bool isPred(string var);
-	bool findSucc(string var);
+	bool isSucc(string var);
 
 	void calcWidth();
 

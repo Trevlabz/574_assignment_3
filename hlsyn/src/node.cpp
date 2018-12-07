@@ -54,7 +54,7 @@ void Node::addSucc(Node* s) {			//add successor node
 	this->succesors.push_back(s);
 }
 
-bool Node::isPred(string var) {			//returns true if var is contained within nodeInputs
+bool Node::isSucc(string var) {			//returns true if var is contained within nodeInputs
 	auto loc = find(this->nodeInputs.begin(), this->nodeInputs.end(), var);
 	if (loc != this->nodeInputs.end())
 		return true;
@@ -62,8 +62,8 @@ bool Node::isPred(string var) {			//returns true if var is contained within node
 }
 
 
-bool Node::findSucc(string var) {
-	if (var.compare(this->nodeOutput))
+bool Node::isPred(string var) {
+	if (var == this->nodeOutput)
 		return true;
 	return false;
 }
